@@ -1,4 +1,4 @@
-import { Quote } from 'lucide-react';
+import { Quote, Star } from 'lucide-react';
 
 const testimonials = [
   {
@@ -39,87 +39,180 @@ const testimonials = [
   }
 ];
 
+const StarRating = ({ rating = 5 }) => (
+  <div style={{ display: 'flex', gap: '2px', marginBottom: '1rem' }}>
+    {[...Array(5)].map((_, i) => (
+      <Star key={i} size={16} fill={i < rating ? "var(--accent-primary)" : "none"} color={i < rating ? "var(--accent-primary)" : "var(--text-light)"} strokeWidth={2} />
+    ))}
+  </div>
+);
+
 export default function Testimonials() {
   return (
-    <section>
+    <section style={{ overflow: 'hidden', position: 'relative' }}>
+      {/* Decorative Background Blobs */}
+      <div style={{
+        position: 'absolute',
+        top: '10%',
+        right: '-5%',
+        width: '400px',
+        height: '400px',
+        background: 'radial-gradient(circle, rgba(79, 70, 229, 0.05) 0%, rgba(255, 255, 255, 0) 70%)',
+        borderRadius: '50%',
+        filter: 'blur(60px)',
+        zIndex: -1
+      }} />
+      <div style={{
+        position: 'absolute',
+        bottom: '10%',
+        left: '-5%',
+        width: '500px',
+        height: '500px',
+        background: 'radial-gradient(circle, rgba(79, 70, 229, 0.03) 0%, rgba(255, 255, 255, 0) 70%)',
+        borderRadius: '50%',
+        filter: 'blur(80px)',
+        zIndex: -1
+      }} />
+
       <div className="container">
-        <div style={{ textAlign: 'center', marginBottom: '5rem' }} className="animate-fade-in">
+        <div style={{ textAlign: 'center', marginBottom: '6rem', position: 'relative', zIndex: 1 }} className="reveal active">
           <span style={{
             color: 'var(--accent-primary)',
-            fontWeight: '700',
+            fontWeight: '800',
             textTransform: 'uppercase',
-            letterSpacing: '0.1em',
-            fontSize: '0.8rem',
-            marginBottom: '1rem',
-            display: 'inline-block'
+            letterSpacing: '0.2em',
+            fontSize: '0.75rem',
+            marginBottom: '1.5rem',
+            display: 'inline-block',
+            backgroundColor: 'var(--accent-light)',
+            padding: '0.6rem 1.5rem',
+            borderRadius: '100px',
+            border: '1px solid rgba(79, 70, 229, 0.1)'
           }}>
             Success Stories
           </span>
-          <h2 style={{ fontSize: 'clamp(2rem, 4vw, 3.5rem)', marginBottom: '1.5rem', fontWeight: '900', letterSpacing: '-0.03em' }}>
-            Trusted by Industry Experts.
+          <h2 style={{ 
+            fontSize: 'clamp(2.5rem, 5vw, 3.8rem)', 
+            marginBottom: '1.5rem', 
+            fontWeight: '900', 
+            letterSpacing: '-0.04em',
+            lineHeight: 1.1
+          }}>
+            Trusted by the <span style={{ color: 'var(--accent-primary)' }}>Best.</span>
           </h2>
-          <p style={{ color: 'var(--text-secondary)', fontSize: '1.15rem', maxWidth: '650px', margin: '0 auto', lineHeight: '1.7' }}>
-            Real results from professionals who transformed their operations through our analytics training.
+          <p style={{ color: 'var(--text-secondary)', fontSize: '1.25rem', maxWidth: '700px', margin: '0 auto', lineHeight: '1.8', fontWeight: '400' }}>
+            Discover how our data-driven approach has powered the growth of world-class organizations.
           </p>
         </div>
 
         <div style={{
           display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(350px, 1fr))',
-          gap: '3rem'
+          gridTemplateColumns: 'repeat(auto-fit, minmax(360px, 1fr))',
+          gap: '2.5rem',
+          position: 'relative',
+          zIndex: 1
         }}>
           {testimonials.map((t, index) => (
             <div key={index} style={{
-              backgroundColor: 'var(--bg-primary)',
-              padding: '3rem',
+              backgroundColor: 'rgba(255, 255, 255, 0.7)',
+              backdropFilter: 'blur(12px)',
+              WebkitBackdropFilter: 'blur(12px)',
+              padding: '3.5rem 3rem 3rem',
               borderRadius: 'var(--radius-xl)',
-              border: '1px solid var(--border-color)',
+              border: '1px solid rgba(255, 255, 255, 0.8)',
               position: 'relative',
-              transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
+              transition: 'all 0.5s cubic-bezier(0.23, 1, 0.32, 1)',
               cursor: 'default',
               display: 'flex',
               flexDirection: 'column',
-              boxShadow: 'var(--shadow-sm)'
+              boxShadow: '0 10px 30px -10px rgba(0,0,0,0.05)',
+              overflow: 'hidden'
             }}
             onMouseOver={(e) => {
-              e.currentTarget.style.transform = 'translateY(-8px)';
-              e.currentTarget.style.boxShadow = 'var(--shadow-lg)';
-              e.currentTarget.style.borderColor = 'rgba(79, 70, 229, 0.2)';
+              e.currentTarget.style.transform = 'translateY(-12px) scale(1.01)';
+              e.currentTarget.style.boxShadow = '0 30px 60px -15px rgba(0,0,0,0.12)';
+              e.currentTarget.style.borderColor = 'rgba(79, 70, 229, 0.3)';
+              const quote = e.currentTarget.querySelector('.quote-icon');
+              if (quote) quote.style.opacity = '0.3';
             }}
             onMouseOut={(e) => {
-              e.currentTarget.style.transform = 'translateY(0)';
-              e.currentTarget.style.boxShadow = 'var(--shadow-sm)';
-              e.currentTarget.style.borderColor = 'var(--border-color)';
+              e.currentTarget.style.transform = 'translateY(0) scale(1)';
+              e.currentTarget.style.boxShadow = '0 10px 30px -10px rgba(0,0,0,0.05)';
+              e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.8)';
+              const quote = e.currentTarget.querySelector('.quote-icon');
+              if (quote) quote.style.opacity = '0.1';
             }}>
-              <Quote size={32} color="var(--accent-primary)" style={{ opacity: 0.15, marginBottom: '1.5rem' }} />
+              {/* Decorative Quote Icon */}
+              <Quote 
+                className="quote-icon"
+                size={80} 
+                color="var(--accent-primary)" 
+                style={{ 
+                  position: 'absolute', 
+                  top: '-10px', 
+                  right: '-10px', 
+                  opacity: 0.1,
+                  transition: 'all 0.5s ease',
+                  transform: 'rotate(10deg)'
+                }} 
+              />
+
+              <StarRating />
+
               <p style={{ 
-                fontSize: '1.1rem', 
+                fontSize: '1.15rem', 
                 color: 'var(--text-primary)', 
                 lineHeight: '1.8',
                 marginBottom: '2.5rem',
-                fontStyle: 'normal',
                 flexGrow: 1,
-                fontWeight: '500'
+                fontWeight: '500',
+                position: 'relative',
+                zIndex: 1
               }}>
                 "{t.text}"
               </p>
               
-              <div style={{ display: 'flex', alignItems: 'center', gap: '1.25rem', marginTop: 'auto', borderTop: '1px solid var(--border-color)', paddingTop: '1.5rem' }}>
-                <img 
-                  src={t.image} 
-                  alt={t.name}
-                  style={{
-                    width: '56px',
-                    height: '56px',
+              <div style={{ 
+                display: 'flex', 
+                alignItems: 'center', 
+                gap: '1.25rem', 
+                marginTop: 'auto', 
+                paddingTop: '2rem',
+                borderTop: '1px solid rgba(0,0,0,0.05)'
+              }}>
+                <div style={{ position: 'relative' }}>
+                  <img 
+                    src={t.image} 
+                    alt={t.name}
+                    style={{
+                      width: '60px',
+                      height: '60px',
+                      borderRadius: '18px',
+                      objectFit: 'cover',
+                      border: '3px solid white',
+                      boxShadow: 'var(--shadow-md)'
+                    }}
+                  />
+                  <div style={{
+                    position: 'absolute',
+                    bottom: '-4px',
+                    right: '-4px',
+                    width: '20px',
+                    height: '20px',
+                    backgroundColor: '#10b981',
                     borderRadius: '50%',
-                    objectFit: 'cover',
-                    border: '2px solid white',
-                    boxShadow: '0 4px 10px rgba(0,0,0,0.1)'
-                  }}
-                />
+                    border: '3px solid white'
+                  }} title="Verified Professional" />
+                </div>
                 <div>
-                  <h4 style={{ fontSize: '1.1rem', marginBottom: '0.2rem', color: 'var(--text-primary)', fontWeight: '800' }}>{t.name}</h4>
-                  <span style={{ color: 'var(--text-light)', fontSize: '0.875rem', fontWeight: '600' }}>{t.role}</span>
+                  <h4 style={{ fontSize: '1.15rem', marginBottom: '0.2rem', color: 'var(--text-primary)', fontWeight: '800' }}>{t.name}</h4>
+                  <span style={{ 
+                    color: 'var(--accent-primary)', 
+                    fontSize: '0.85rem', 
+                    fontWeight: '700',
+                    textTransform: 'uppercase',
+                    letterSpacing: '0.05em'
+                  }}>{t.role}</span>
                 </div>
               </div>
             </div>

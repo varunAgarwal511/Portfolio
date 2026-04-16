@@ -104,14 +104,9 @@ export default function DomainProjects({ domain, onBack }) {
         </div>
 
         {/* Impact Metrics */}
-        <div style={{ 
-          display: 'grid', 
-          gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', 
-          gap: '2rem',
-          marginBottom: '5rem' 
-        }}>
+        <div className="mobile-slider-container" style={{ marginBottom: '5rem' }}>
           {selectedProject.impact.map((metric, i) => (
-            <div key={i} style={{
+            <div key={i} className="mobile-slider-item" style={{
               backgroundColor: 'var(--bg-secondary)',
               padding: '2.5rem',
               borderRadius: 'var(--radius-lg)',
@@ -151,8 +146,8 @@ export default function DomainProjects({ domain, onBack }) {
         {/* Content Section */}
         <div style={{ 
           display: 'grid', 
-          gridTemplateColumns: 'repeat(auto-fit, minmax(400px, 1fr))', 
-          gap: '5rem' 
+          gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', 
+          gap: '3rem' 
         }}>
           <div>
             <h3 style={{ fontSize: '2rem', marginBottom: '2rem', display: 'flex', alignItems: 'center', gap: '1rem' }}>
@@ -262,13 +257,9 @@ export default function DomainProjects({ domain, onBack }) {
         </div>
       </div>
 
-      <div style={{
-        display: 'grid',
-        gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
-        gap: '2.5rem'
-      }}>
+      <div className="mobile-slider-container">
         {domain.projects.map((project, idx) => (
-          <div key={project.id} className="project-card" style={{
+          <div key={project.id} className="project-card mobile-slider-item" style={{
             backgroundColor: 'var(--bg-primary)',
             borderRadius: 'var(--radius-xl)',
             padding: '2.5rem',

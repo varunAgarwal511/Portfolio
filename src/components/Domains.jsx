@@ -236,13 +236,10 @@ export default function Domains() {
               </p>
             </div>
 
-            <div style={{
-              display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fit, minmax(350px, 1fr))',
-              gap: '3rem'
-            }}>
+            <div className="mobile-slider-container">
               {domains.map((domain) => (
-                <div key={domain.id} 
+                <div key={domain.id}
+                  className="mobile-slider-item"
                   onClick={() => setSelectedDomain(domain.id)}
                   style={{
                   backgroundColor: 'var(--bg-primary)',
