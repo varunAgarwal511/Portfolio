@@ -75,7 +75,7 @@ export default function Testimonials() {
       }} />
 
       <div className="container">
-        <div style={{ textAlign: 'center', marginBottom: '6rem', position: 'relative', zIndex: 1 }} className="reveal active">
+        <div style={{ textAlign: 'center', marginBottom: '2rem', position: 'relative', zIndex: 1 }} className="reveal active">
           <span style={{
             color: 'var(--accent-primary)',
             fontWeight: '800',
@@ -91,10 +91,10 @@ export default function Testimonials() {
           }}>
             Success Stories
           </span>
-          <h2 style={{ 
-            fontSize: 'clamp(2.5rem, 5vw, 3.8rem)', 
-            marginBottom: '1.5rem', 
-            fontWeight: '900', 
+          <h2 style={{
+            fontSize: 'clamp(2.5rem, 5vw, 3.8rem)',
+            marginBottom: '1.5rem',
+            fontWeight: '900',
             letterSpacing: '-0.04em',
             lineHeight: 1.1
           }}>
@@ -105,19 +105,16 @@ export default function Testimonials() {
           </p>
         </div>
 
-        <div style={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(360px, 1fr))',
-          gap: '2.5rem',
+        <div className="mobile-slider-container" style={{
           position: 'relative',
           zIndex: 1
         }}>
           {testimonials.map((t, index) => (
-            <div key={index} style={{
+            <div key={index} className="mobile-slider-item full-width-slide" style={{
               backgroundColor: 'rgba(255, 255, 255, 0.7)',
               backdropFilter: 'blur(12px)',
               WebkitBackdropFilter: 'blur(12px)',
-              padding: '3.5rem 3rem 3rem',
+              padding: 'clamp(1.5rem, 5vw, 3.5rem) clamp(1.5rem, 5vw, 3rem) clamp(1.5rem, 5vw, 3rem)',
               borderRadius: 'var(--radius-xl)',
               border: '1px solid rgba(255, 255, 255, 0.8)',
               position: 'relative',
@@ -128,42 +125,42 @@ export default function Testimonials() {
               boxShadow: '0 10px 30px -10px rgba(0,0,0,0.05)',
               overflow: 'hidden'
             }}
-            onMouseOver={(e) => {
-              e.currentTarget.style.transform = 'translateY(-12px) scale(1.01)';
-              e.currentTarget.style.boxShadow = '0 30px 60px -15px rgba(0,0,0,0.12)';
-              e.currentTarget.style.borderColor = 'rgba(79, 70, 229, 0.3)';
-              const quote = e.currentTarget.querySelector('.quote-icon');
-              if (quote) quote.style.opacity = '0.3';
-            }}
-            onMouseOut={(e) => {
-              e.currentTarget.style.transform = 'translateY(0) scale(1)';
-              e.currentTarget.style.boxShadow = '0 10px 30px -10px rgba(0,0,0,0.05)';
-              e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.8)';
-              const quote = e.currentTarget.querySelector('.quote-icon');
-              if (quote) quote.style.opacity = '0.1';
-            }}>
+              onMouseOver={(e) => {
+                e.currentTarget.style.transform = 'translateY(-12px) scale(1.01)';
+                e.currentTarget.style.boxShadow = '0 30px 60px -15px rgba(0,0,0,0.12)';
+                e.currentTarget.style.borderColor = 'rgba(79, 70, 229, 0.3)';
+                const quote = e.currentTarget.querySelector('.quote-icon');
+                if (quote) quote.style.opacity = '0.3';
+              }}
+              onMouseOut={(e) => {
+                e.currentTarget.style.transform = 'translateY(0) scale(1)';
+                e.currentTarget.style.boxShadow = '0 10px 30px -10px rgba(0,0,0,0.05)';
+                e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.8)';
+                const quote = e.currentTarget.querySelector('.quote-icon');
+                if (quote) quote.style.opacity = '0.1';
+              }}>
               {/* Decorative Quote Icon */}
-              <Quote 
+              <Quote
                 className="quote-icon"
-                size={80} 
-                color="var(--accent-primary)" 
-                style={{ 
-                  position: 'absolute', 
-                  top: '-10px', 
-                  right: '-10px', 
+                size={80}
+                color="var(--accent-primary)"
+                style={{
+                  position: 'absolute',
+                  top: '-10px',
+                  right: '-10px',
                   opacity: 0.1,
                   transition: 'all 0.5s ease',
                   transform: 'rotate(10deg)'
-                }} 
+                }}
               />
 
               <StarRating />
 
-              <p style={{ 
-                fontSize: '1.15rem', 
-                color: 'var(--text-primary)', 
+              <p style={{
+                fontSize: 'clamp(0.95rem, 4vw, 1.15rem)',
+                color: 'var(--text-primary)',
                 lineHeight: '1.8',
-                marginBottom: '2.5rem',
+                marginBottom: 'clamp(1.5rem, 4vw, 2.5rem)',
                 flexGrow: 1,
                 fontWeight: '500',
                 position: 'relative',
@@ -171,18 +168,18 @@ export default function Testimonials() {
               }}>
                 "{t.text}"
               </p>
-              
-              <div style={{ 
-                display: 'flex', 
-                alignItems: 'center', 
-                gap: '1.25rem', 
-                marginTop: 'auto', 
+
+              <div style={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: '1.25rem',
+                marginTop: 'auto',
                 paddingTop: '2rem',
                 borderTop: '1px solid rgba(0,0,0,0.05)'
               }}>
                 <div style={{ position: 'relative' }}>
-                  <img 
-                    src={t.image} 
+                  <img
+                    src={t.image}
                     alt={t.name}
                     style={{
                       width: '60px',
@@ -206,9 +203,9 @@ export default function Testimonials() {
                 </div>
                 <div>
                   <h4 style={{ fontSize: '1.15rem', marginBottom: '0.2rem', color: 'var(--text-primary)', fontWeight: '800' }}>{t.name}</h4>
-                  <span style={{ 
-                    color: 'var(--accent-primary)', 
-                    fontSize: '0.85rem', 
+                  <span style={{
+                    color: 'var(--accent-primary)',
+                    fontSize: '0.85rem',
                     fontWeight: '700',
                     textTransform: 'uppercase',
                     letterSpacing: '0.05em'

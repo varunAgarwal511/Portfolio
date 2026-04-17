@@ -2,7 +2,7 @@ import { Mail, Briefcase, MapPin, ExternalLink } from 'lucide-react';
 
 export default function Contact() {
   return (
-    <section id="contact" style={{ backgroundColor: 'var(--bg-secondary)', color: 'var(--text-primary)', padding: '8rem 0 4rem 0' }}>
+    <section id="contact" style={{ backgroundColor: 'var(--bg-secondary)', color: 'var(--text-primary)', padding: '2rem 0 2rem 0' }}>
       <div className="container">
         <div className="contact-grid">
           <div className="animate-fade-in">

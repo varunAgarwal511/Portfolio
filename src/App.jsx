@@ -5,6 +5,7 @@ import Domains from "./components/Domains";
 import Benefits from "./components/Benefits";
 import Testimonials from "./components/Testimonials";
 import Contact from "./components/Contact";
+import bsquareLogo from "./assets/bsquare-01.png";
 
 export default function App() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -28,7 +29,7 @@ export default function App() {
   return (
     <div style={{ backgroundColor: 'var(--bg-primary)', minHeight: '100vh' }}>
       <header style={{
-        padding: '1.25rem 0',
+        padding: '0.4rem 0',
         borderBottom: '1px solid rgba(0,0,0,0.06)',
         position: 'sticky',
         top: 0,
@@ -40,63 +41,29 @@ export default function App() {
       }}>
         <div className="container" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
           {/* Logo */}
-          <div style={{
-            fontFamily: "'Plus Jakarta Sans', sans-serif",
-            fontSize: '1.4rem',
-            color: 'var(--text-primary)',
-            letterSpacing: '-0.03em',
-            display: 'flex',
-            alignItems: 'center',
-            gap: '0.75rem',
-            cursor: 'pointer'
-          }}>
-            <div style={{
-              width: '42px',
-              height: '42px',
-              backgroundColor: 'var(--accent-primary)',
-              borderRadius: '12px',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              color: 'white',
-              fontWeight: '900',
-              fontSize: '1.6rem',
-              boxShadow: '0 8px 16px rgba(79, 70, 229, 0.2)',
-              position: 'relative',
-              overflow: 'hidden'
-            }}>
-              B
-              <div style={{
-                position: 'absolute',
-                top: 0,
-                left: 0,
-                width: '100%',
-                height: '100%',
-                background: 'linear-gradient(135deg, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0) 100%)'
-              }} />
-            </div>
-            <div style={{ display: 'flex', flexDirection: 'column', lineHeight: 1 }}>
-              <span style={{ fontWeight: '900', fontSize: '1.25rem' }}>Bsquare</span>
-              <span style={{ 
-                fontWeight: '600', 
-                fontSize: '0.7rem', 
-                color: 'var(--accent-primary)', 
-                textTransform: 'uppercase', 
-                letterSpacing: '0.1em',
-                marginTop: '2px'
-              }}>software service</span>
-            </div>
+          <div style={{ cursor: 'pointer', display: 'flex', alignItems: 'center' }}>
+            <img 
+              src={bsquareLogo} 
+              alt="Bsquare Software Service" 
+              style={{
+                height: '45px',
+                width: 'auto',
+                objectFit: 'contain',
+                transform: 'scale(3.4)',
+                transformOrigin: 'left center'
+              }} 
+            />
           </div>
 
           {/* Desktop Nav */}
           <nav className="nav-links" style={{ display: 'flex', gap: '2.5rem', alignItems: 'center' }}>
             {['Domains', 'Benefits', 'Testimonials'].map((item) => (
-              <a 
+              <a
                 key={item}
-                href={`#${item.toLowerCase()}`} 
-                style={{ 
-                  color: 'var(--text-secondary)', 
-                  fontWeight: '700', 
+                href={`#${item.toLowerCase()}`}
+                style={{
+                  color: 'var(--text-secondary)',
+                  fontWeight: '700',
                   fontSize: '0.95rem',
                   position: 'relative',
                   padding: '0.2rem 0'
@@ -113,7 +80,7 @@ export default function App() {
                 }}
               >
                 {item}
-                <div 
+                <div
                   className="nav-underline"
                   style={{
                     position: 'absolute',
@@ -140,14 +107,14 @@ export default function App() {
               border: 'none',
               marginLeft: '0.5rem'
             }}
-            onMouseOver={(e) => {
-              e.currentTarget.style.transform = 'translateY(-2px)';
-              e.currentTarget.style.boxShadow = '0 15px 30px -5px rgba(79,70,229,0.5)';
-            }}
-            onMouseOut={(e) => {
-              e.currentTarget.style.transform = 'translateY(0)';
-              e.currentTarget.style.boxShadow = '0 10px 20px -5px rgba(79,70,229,0.4)';
-            }}>
+              onMouseOver={(e) => {
+                e.currentTarget.style.transform = 'translateY(-2px)';
+                e.currentTarget.style.boxShadow = '0 15px 30px -5px rgba(79,70,229,0.5)';
+              }}
+              onMouseOut={(e) => {
+                e.currentTarget.style.transform = 'translateY(0)';
+                e.currentTarget.style.boxShadow = '0 10px 20px -5px rgba(79,70,229,0.4)';
+              }}>
               Get Started
             </a>
           </nav>
@@ -158,16 +125,19 @@ export default function App() {
             onClick={() => setIsMenuOpen(!isMenuOpen)}
             aria-label="Toggle Menu"
             style={{
-              background: 'none',
-              border: '1px solid rgba(0,0,0,0.1)',
-              borderRadius: '10px',
+              background: 'var(--accent-light)',
+              border: 'none',
+              borderRadius: '8px',
               padding: '0.5rem',
               cursor: 'pointer',
-              color: 'var(--text-primary)',
-              lineHeight: 0
+              color: 'var(--accent-primary)',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              boxShadow: '0 4px 6px rgba(79, 70, 229, 0.1)'
             }}
           >
-            {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
+            {isMenuOpen ? <X size={28} strokeWidth={2.5} /> : <Menu size={28} strokeWidth={2.5} />}
           </button>
         </div>
       </header>

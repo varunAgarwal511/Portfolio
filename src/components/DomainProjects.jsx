@@ -106,7 +106,7 @@ export default function DomainProjects({ domain, onBack }) {
         {/* Impact Metrics */}
         <div className="mobile-slider-container" style={{ marginBottom: '5rem' }}>
           {selectedProject.impact.map((metric, i) => (
-            <div key={i} className="mobile-slider-item" style={{
+            <div key={i} className="mobile-slider-item full-width-slide" style={{
               backgroundColor: 'var(--bg-secondary)',
               padding: '2.5rem',
               borderRadius: 'var(--radius-lg)',
@@ -259,7 +259,7 @@ export default function DomainProjects({ domain, onBack }) {
 
       <div className="mobile-slider-container">
         {domain.projects.map((project, idx) => (
-          <div key={project.id} className="project-card mobile-slider-item" style={{
+          <div key={project.id} className="project-card mobile-slider-item full-width-slide" style={{
             backgroundColor: 'var(--bg-primary)',
             borderRadius: 'var(--radius-xl)',
             padding: '2.5rem',

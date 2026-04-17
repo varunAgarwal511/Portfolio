@@ -203,7 +203,7 @@ export default function Domains() {
   const currentDomainInfo = domains.find(d => d.id === selectedDomain);
 
   return (
-    <section id="domains" style={{ padding: '6rem 0' }}>
+    <section id="domains">
       <div className="container">
         {selectedDomain && currentDomainInfo ? (
           <DomainProjects 
@@ -213,7 +213,7 @@ export default function Domains() {
         ) : (
           // Grid View
           <>
-            <div style={{ textAlign: 'center', marginBottom: '5rem' }}>
+            <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
               <span style={{
                 color: 'var(--accent-primary)',
                 fontWeight: '700',
@@ -239,7 +239,7 @@ export default function Domains() {
             <div className="mobile-slider-container">
               {domains.map((domain) => (
                 <div key={domain.id}
-                  className="mobile-slider-item"
+                  className="mobile-slider-item full-width-slide"
                   onClick={() => setSelectedDomain(domain.id)}
                   style={{
                   backgroundColor: 'var(--bg-primary)',
@@ -312,7 +312,7 @@ export default function Domains() {
                     <div style={{
                       display: 'flex',
                       alignItems: 'center',
-                      gap: '0.75rem',
+                      gap: '1rem',
                       marginTop: 'auto',
                       paddingTop: '1.5rem',
                       borderTop: '1px solid var(--border-color)'

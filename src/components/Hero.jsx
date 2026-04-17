@@ -44,7 +44,7 @@ export default function Hero() {
           
           <div className="hero-actions">
             <a href="#domains" className="btn-primary" style={{ padding: '1.1rem 2.8rem', fontSize: '1.15rem' }}>
-               Explore Syllabus <ArrowRight size={22} />
+               Explore curriculum <ArrowRight size={22} />
             </a>
           </div>
 

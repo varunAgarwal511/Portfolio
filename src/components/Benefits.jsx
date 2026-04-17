@@ -16,7 +16,7 @@ export default function Benefits() {
         <div style={{
           display: 'grid',
           gridTemplateColumns: '1fr 1fr',
-          gap: '6rem',
+          gap: '2rem',
           alignItems: 'center'
         }}>
           {/* Text Content */}
