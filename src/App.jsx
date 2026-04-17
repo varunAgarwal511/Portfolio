@@ -36,27 +36,27 @@ export default function App() {
         backgroundColor: 'rgba(255, 255, 255, 0.9)',
         backdropFilter: 'blur(16px)',
         WebkitBackdropFilter: 'blur(16px)',
-        zIndex: 200,
+        zIndex: 2000,
         transition: 'all 0.3s ease'
       }}>
         <div className="container" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
           {/* Logo */}
           <div style={{ cursor: 'pointer', display: 'flex', alignItems: 'center' }}>
-            <img 
-              src={bsquareLogo} 
-              alt="Bsquare Software Service" 
+            <img
+              src={bsquareLogo}
+              alt="Bsquare Software Service"
               style={{
                 height: '45px',
                 width: 'auto',
                 objectFit: 'contain',
                 transform: 'scale(3.4)',
                 transformOrigin: 'left center'
-              }} 
+              }}
             />
           </div>
 
           {/* Desktop Nav */}
-          <nav className="nav-links" style={{ display: 'flex', gap: '2.5rem', alignItems: 'center' }}>
+          <nav className="nav-links">
             {['Domains', 'Benefits', 'Testimonials'].map((item) => (
               <a
                 key={item}

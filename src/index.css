@@ -273,31 +273,25 @@ section {
 }
 
 .mobile-menu-overlay {
-  display: none;
+  display: none; /* hidden on desktop */
   position: fixed;
-  top: 72px;
-  /* Header height offset */
-  left: 0;
-  width: 100%;
-  height: calc(100vh - 72px);
+  top: 0;
+  right: -100%;
+  width: 280px;
+  max-width: 80vw;
+  height: 100vh;
   background-color: var(--bg-primary);
-  z-index: 100;
+  z-index: 1000;
   flex-direction: column;
-  padding: 2rem;
+  padding: 7rem 2rem 2rem; /* padding top to clear the sticky navbar */
   gap: 2rem;
-  animation: slideInBottom 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: right 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: -15px 0 30px rgba(0,0,0,0.1);
 }
 
-@keyframes slideInBottom {
-  from {
-    transform: translateY(100%);
-    opacity: 0;
-  }
-
-  to {
-    transform: translateY(0);
-    opacity: 1;
-  }
+@keyframes slideInRight {
+  from { right: -100%; }
+  to { right: 0; }
 }
 
 @media (max-width: 768px) {
@@ -308,9 +302,13 @@ section {
   .mobile-menu-btn {
     display: block;
   }
+  
+  .mobile-menu-overlay {
+    display: flex; /* only display flex on mobile */
+  }
 
   .mobile-menu-overlay.active {
-    display: flex;
+    right: 0;
   }
 }
 
@@ -344,7 +342,8 @@ section {
   }
 
   .full-width-slide {
-    min-width: 100%; /* Force exactly 100% of the container width */
+    min-width: 100%;
+    /* Force exactly 100% of the container width */
     width: 100%;
     scroll-snap-align: center;
   }
