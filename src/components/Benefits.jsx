@@ -39,7 +39,7 @@ export default function Benefits() {
             <p style={{ color: 'var(--text-secondary)', fontSize: '1.15rem', marginBottom: '2.5rem', lineHeight: '1.8' }}>
               We don't just teach tools; we build analysts. Our curriculum is forged in real-world corporate requirements, ensuring you're ready for the most demanding data environments.
             </p>
-            
+
             <ul style={{ listStyle: 'none', padding: 0 }}>
               {benefitsList.map((benefit, index) => (
                 <li key={index} style={{
@@ -59,7 +59,7 @@ export default function Benefits() {
               ))}
             </ul>
           </div>
-          
+
           {/* Visual Element: Educational Image */}
           <div style={{ position: 'relative' }} className="animate-fade-in">
             <div style={{
@@ -72,9 +72,9 @@ export default function Benefits() {
               borderRadius: 'var(--radius-xl)',
               zIndex: 0
             }}></div>
-            <img 
-              src="https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=1200&q=80" 
-              alt="Professional analytics team collaborating" 
+            <img
+              src="https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=1200&q=80"
+              alt="Professional analytics team collaborating"
               style={{
                 width: '100%',
                 maxHeight: '550px',

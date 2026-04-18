@@ -271,7 +271,7 @@ export default function Domains() {
                 Industry Solutions
               </span>
               <h2 style={{ fontSize: 'clamp(2rem, 4vw, 3.5rem)', marginBottom: '1.5rem', fontWeight: '800', lineHeight: '1.2' }}>
-                Domain-Specific Expertise
+                Power BI-Specific Expertise
               </h2>
               <p style={{ color: 'var(--text-secondary)', fontSize: '1.15rem', maxWidth: '650px', margin: '0 auto', lineHeight: '1.7' }}>
                 We bridge the gap between complex data and strategic clarity across diverse industry verticals.

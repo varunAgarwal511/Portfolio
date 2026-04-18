@@ -3,7 +3,7 @@ import { Quote, Star, ChevronLeft, ChevronRight } from 'lucide-react';
 
 const testimonials = [
   {
-    name: 'Sarah Jenkins',
+    name: ' Varun Jenkins',
     role: 'Director of Operations, MedCorp',
     text: 'The Healthcare dashboard provided an unprecedented view into our operational bottlenecks. We reduced patient wait times by 22% in the first quarter alone.',
     image: 'https://randomuser.me/api/portraits/women/44.jpg'
