@@ -43,6 +43,7 @@ body {
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   overflow-x: hidden;
+  font-weight: 400;
 }
 
 h1,
@@ -51,11 +52,11 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-family: 'Outfit', sans-serif;
   font-weight: 800;
-  line-height: 1.15;
+  line-height: 1.1;
   color: var(--text-primary);
-  letter-spacing: -0.04em;
+  letter-spacing: -0.05em;
 }
 
 a {
@@ -313,45 +314,116 @@ section {
 }
 
 /* --- MOBILE SLIDER UTILITIES --- */
-.mobile-slider-container {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-  gap: 3rem;
-}
+  /* Static display for desktop grid */
+  .mobile-slider-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 3rem;
+  }
+
+  /* Slider Navigation Styles - Hidden on Desktop */
+  .slider-nav-btn {
+    display: none;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    color: var(--text-primary);
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 10;
+    transition: all 0.3s ease;
+    box-shadow: var(--shadow-md);
+  }
+
+  .slider-nav-btn:hover {
+    background: white;
+    box-shadow: var(--shadow-lg);
+    color: var(--accent-primary);
+    transform: translateY(-50%) scale(1.1);
+  }
+
+  .slider-nav-btn.prev { left: -10px; }
+  .slider-nav-btn.next { right: -10px; }
+
+  .slider-dots {
+    display: none;
+    justify-content: center;
+    gap: 0.75rem;
+    margin-top: 1rem;
+  }
+
+  .dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--bg-tertiary);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: none;
+  }
+
+  .dot.active {
+    background: var(--accent-primary);
+    width: 24px;
+    border-radius: 4px;
+  }
 
 @media (max-width: 768px) {
   .mobile-slider-container {
     display: flex;
     overflow-x: auto;
     scroll-snap-type: x mandatory;
-    gap: 1.5rem;
-    padding: 1rem 0 2rem;
-    margin: 0 -1rem;
-    /* Negative margin to bleed to edge if needed */
-    padding-left: 1rem;
-    padding-right: 1rem;
+    gap: 1.25rem;
+    padding: 1.5rem 0 3rem;
+    margin: 0 -1.5rem;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
     scrollbar-width: none;
-    /* Firefox */
     -ms-overflow-style: none;
-    /* IE and Edge */
+    scroll-behavior: smooth;
   }
 
   .mobile-slider-container::-webkit-scrollbar {
     display: none;
-    /* Chrome, Safari and Opera */
   }
 
   .full-width-slide {
-    min-width: 100%;
-    /* Force exactly 100% of the container width */
-    width: 100%;
+    min-width: 88%; /* Shows a peek of the next card */
+    max-width: 88%;
     scroll-snap-align: center;
+    flex-shrink: 0;
   }
 
   .mobile-slider-item {
-    min-width: 85vw;
     scroll-snap-align: center;
     flex-shrink: 0;
+  }
+
+  .slider-nav-btn {
+    display: flex; /* Show only on mobile if needed, or keep hidden if only swipe is desired */
+  }
+
+  .slider-dots {
+    display: flex;
+  }
+
+  /* Slider Card Effects - Only on Mobile */
+  .slider-card {
+    opacity: 0.6;
+    transform: scale(0.95);
+    transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+  }
+
+  .slider-card.active {
+    opacity: 1;
+    transform: scale(1);
   }
 
   section {

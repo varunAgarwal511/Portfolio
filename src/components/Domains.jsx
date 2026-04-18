@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Activity, Car, Utensils, ArrowRight, ArrowLeft } from 'lucide-react';
+import React, { useState, useRef } from 'react';
+import { Activity, Car, Utensils, ArrowRight, ArrowLeft, ChevronLeft, ChevronRight } from 'lucide-react';
 import healthcareImg from '../assets/domains/healthcare.png';
 import restaurantImg from '../assets/domains/restaurant.png';
 import automobileImg from '../assets/domains/automobile.png';
@@ -199,8 +199,50 @@ const domains = [
 
 export default function Domains() {
   const [selectedDomain, setSelectedDomain] = useState(null);
+  const [activeIndex, setActiveIndex] = useState(0);
+  const scrollRef = useRef(null);
 
   const currentDomainInfo = domains.find(d => d.id === selectedDomain);
+
+  const handleScroll = () => {
+    if (scrollRef.current) {
+      const container = scrollRef.current;
+      const scrollPosition = container.scrollLeft;
+      const itemWidth = container.offsetWidth * 0.88;
+      const newIndex = Math.round(scrollPosition / itemWidth);
+      if (newIndex !== activeIndex && newIndex < domains.length) {
+        setActiveIndex(newIndex);
+      }
+    }
+  };
+
+  const scrollTo = (index) => {
+    if (scrollRef.current) {
+      const container = scrollRef.current;
+      const itemWidth = container.offsetWidth * 0.88;
+      container.scrollTo({
+        left: index * itemWidth,
+        behavior: 'smooth'
+      });
+      setActiveIndex(index);
+    }
+  };
+
+  const nextSlide = () => {
+    if (activeIndex < domains.length - 1) {
+      scrollTo(activeIndex + 1);
+    } else {
+      scrollTo(0);
+    }
+  };
+
+  const prevSlide = () => {
+    if (activeIndex > 0) {
+      scrollTo(activeIndex - 1);
+    } else {
+      scrollTo(domains.length - 1);
+    }
+  };
 
   return (
     <section id="domains">
@@ -236,105 +278,131 @@ export default function Domains() {
               </p>
             </div>
 
-            <div className="mobile-slider-container">
-              {domains.map((domain) => (
-                <div key={domain.id}
-                  className="mobile-slider-item full-width-slide"
-                  onClick={() => setSelectedDomain(domain.id)}
-                  style={{
-                  backgroundColor: 'var(--bg-primary)',
-                  borderRadius: 'var(--radius-xl)',
-                  overflow: 'hidden',
-                  border: '1px solid var(--border-color)',
-                  boxShadow: 'var(--shadow-ambient)',
-                  cursor: 'pointer',
-                  transition: 'all 0.6s cubic-bezier(0.16, 1, 0.3, 1)',
-                  display: 'flex',
-                  flexDirection: 'column',
-                  position: 'relative'
-                }}
-                  onMouseOver={(e) => {
-                    e.currentTarget.style.transform = 'translateY(-12px) scale(1.02)';
-                    e.currentTarget.style.boxShadow = 'var(--shadow-xl)';
-                    e.currentTarget.style.borderColor = 'var(--accent-primary)';
-                    const img = e.currentTarget.querySelector('img');
-                    if (img) img.style.transform = 'scale(1.1)';
-                    const arrow = e.currentTarget.querySelector('.arrow-icon');
-                    if (arrow) arrow.style.transform = 'translateX(8px)';
+            <div style={{ position: 'relative', padding: '0 10px' }}>
+              {/* Navigation Arrows (Desktop) */}
+              <button className="slider-nav-btn prev" onClick={prevSlide} aria-label="Previous domain" style={{ top: '40%' }}>
+                <ChevronLeft size={24} />
+              </button>
+              <button className="slider-nav-btn next" onClick={nextSlide} aria-label="Next domain" style={{ top: '40%' }}>
+                <ChevronRight size={24} />
+              </button>
+
+              <div 
+                ref={scrollRef}
+                onScroll={handleScroll}
+                className="mobile-slider-container"
+              >
+                {domains.map((domain, index) => (
+                  <div key={domain.id}
+                    className={`mobile-slider-item full-width-slide slider-card ${activeIndex === index ? 'active' : ''}`}
+                    onClick={() => setSelectedDomain(domain.id)}
+                    style={{
+                    backgroundColor: 'var(--bg-primary)',
+                    borderRadius: 'var(--radius-xl)',
+                    overflow: 'hidden',
+                    border: '1px solid var(--border-color)',
+                    boxShadow: 'var(--shadow-ambient)',
+                    cursor: 'pointer',
+                    transition: 'all 0.6s cubic-bezier(0.16, 1, 0.3, 1)',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    position: 'relative'
                   }}
-                  onMouseOut={(e) => {
-                    e.currentTarget.style.transform = 'translateY(0) scale(1)';
-                    e.currentTarget.style.boxShadow = 'var(--shadow-ambient)';
-                    e.currentTarget.style.borderColor = 'var(--border-color)';
-                    const img = e.currentTarget.querySelector('img');
-                    if (img) img.style.transform = 'scale(1)';
-                    const arrow = e.currentTarget.querySelector('.arrow-icon');
-                    if (arrow) arrow.style.transform = 'translateX(0)';
-                  }}>
-
-                  <div style={{ height: '260px', overflow: 'hidden', position: 'relative' }}>
-                    <img
-                      src={domain.image}
-                      alt={domain.title}
-                      style={{
-                        width: '100%',
-                        height: '100%',
-                        objectFit: 'cover',
-                        transition: 'transform 0.8s cubic-bezier(0.4, 0, 0.2, 1)',
-                        display: 'block'
-                      }}
-                    />
-                  </div>
-
-                  <div style={{ padding: '3rem 2.5rem 2.5rem', display: 'flex', flexDirection: 'column', flexGrow: 1, position: 'relative' }}>
-                    <div style={{
-                      position: 'absolute',
-                      top: '-35px',
-                      left: '2.5rem',
-                      backgroundColor: 'var(--bg-primary)',
-                      boxShadow: 'var(--shadow-md)',
-                      padding: '1.25rem',
-                      borderRadius: 'var(--radius-lg)',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      border: '1px solid var(--border-color)',
-                      zIndex: 2
+                    onMouseOver={(e) => {
+                      e.currentTarget.style.transform = 'translateY(-12px) scale(1.02)';
+                      e.currentTarget.style.boxShadow = 'var(--shadow-xl)';
+                      e.currentTarget.style.borderColor = 'var(--accent-primary)';
+                      const img = e.currentTarget.querySelector('img');
+                      if (img) img.style.transform = 'scale(1.1)';
+                      const arrow = e.currentTarget.querySelector('.arrow-icon');
+                      if (arrow) arrow.style.transform = 'translateX(8px)';
+                    }}
+                    onMouseOut={(e) => {
+                      e.currentTarget.style.transform = '';
+                      e.currentTarget.style.boxShadow = 'var(--shadow-ambient)';
+                      e.currentTarget.style.borderColor = 'var(--border-color)';
+                      const img = e.currentTarget.querySelector('img');
+                      if (img) img.style.transform = 'scale(1)';
+                      const arrow = e.currentTarget.querySelector('.arrow-icon');
+                      if (arrow) arrow.style.transform = 'translateX(0)';
                     }}>
-                      {domain.icon}
+
+                    <div style={{ height: '260px', overflow: 'hidden', position: 'relative' }}>
+                      <img
+                        src={domain.image}
+                        alt={domain.title}
+                        style={{
+                          width: '100%',
+                          height: '100%',
+                          objectFit: 'cover',
+                          transition: 'transform 0.8s cubic-bezier(0.4, 0, 0.2, 1)',
+                          display: 'block'
+                        }}
+                      />
                     </div>
 
-                    <h3 style={{ fontSize: '1.75rem', marginBottom: '1rem', fontWeight: '800', color: 'var(--text-primary)', letterSpacing: '-0.02em' }}>{domain.title}</h3>
-                    <p style={{ color: 'var(--text-secondary)', lineHeight: '1.7', marginBottom: '2.5rem', flexGrow: 1, fontSize: '1.05rem' }}>
-                      {domain.description}
-                    </p>
-
-                    <div style={{
-                      display: 'flex',
-                      alignItems: 'center',
-                      gap: '1rem',
-                      marginTop: 'auto',
-                      paddingTop: '1.5rem',
-                      borderTop: '1px solid var(--border-color)'
-                    }}>
-                      <span style={{
-                        color: 'var(--accent-primary)',
-                        fontWeight: '700',
-                        fontSize: '1rem'
-                      }}>
-                        Explore Case Studies
-                      </span>
-                      <div className="arrow-icon" style={{
-                        transition: 'transform 0.3s ease',
+                    <div style={{ padding: '3rem 2.5rem 2.5rem', display: 'flex', flexDirection: 'column', flexGrow: 1, position: 'relative' }}>
+                      <div style={{
+                        position: 'absolute',
+                        top: '-35px',
+                        left: '2.5rem',
+                        backgroundColor: 'var(--bg-primary)',
+                        boxShadow: 'var(--shadow-md)',
+                        padding: '1.25rem',
+                        borderRadius: 'var(--radius-lg)',
                         display: 'flex',
-                        alignItems: 'center'
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        border: '1px solid var(--border-color)',
+                        zIndex: 2
                       }}>
-                        <ArrowRight size={20} color="var(--accent-primary)" />
+                        {domain.icon}
+                      </div>
+
+                      <h3 style={{ fontSize: '1.75rem', marginBottom: '1rem', fontWeight: '800', color: 'var(--text-primary)', letterSpacing: '-0.02em' }}>{domain.title}</h3>
+                      <p style={{ color: 'var(--text-secondary)', lineHeight: '1.7', marginBottom: '2.5rem', flexGrow: 1, fontSize: '1.05rem' }}>
+                        {domain.description}
+                      </p>
+
+                      <div style={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: '1rem',
+                        marginTop: 'auto',
+                        paddingTop: '1.5rem',
+                        borderTop: '1px solid var(--border-color)'
+                      }}>
+                        <span style={{
+                          color: 'var(--accent-primary)',
+                          fontWeight: '700',
+                          fontSize: '1rem'
+                        }}>
+                          Explore Case Studies
+                        </span>
+                        <div className="arrow-icon" style={{
+                          transition: 'transform 0.3s ease',
+                          display: 'flex',
+                          alignItems: 'center'
+                        }}>
+                          <ArrowRight size={20} color="var(--accent-primary)" />
+                        </div>
                       </div>
                     </div>
                   </div>
-                </div>
-              ))}
+                ))}
+              </div>
+
+              {/* Pagination Dots */}
+              <div className="slider-dots">
+                {domains.map((_, i) => (
+                  <button
+                    key={i}
+                    className={`dot ${activeIndex === i ? 'active' : ''}`}
+                    onClick={() => scrollTo(i)}
+                    aria-label={`Go to domain ${i + 1}`}
+                  />
+                ))}
+              </div>
             </div>
           </>
         )}

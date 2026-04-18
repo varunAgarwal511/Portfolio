@@ -24,21 +24,26 @@ export default function Hero() {
             <BookOpen size={16} /> <span>Global Learning Leader</span>
           </div>
           
-          <h1 className="hero-title-responsive">
+          <h1 className="hero-title-responsive" style={{ fontWeight: 900 }}>
             Master the Art of <br />
             <span style={{ 
               color: 'var(--accent-primary)',
               background: 'linear-gradient(90deg, var(--accent-primary) 0%, #a855f7 100%)',
               WebkitBackgroundClip: 'text',
               WebkitTextFillColor: 'transparent',
-              display: 'inline-block'
+              display: 'inline-block',
+              paddingBottom: '0.1em'
             }}>
               Interactive
             </span> <br />
             Data Intelligence.
           </h1>
           
-          <p className="hero-subtitle-responsive">
+          <p className="hero-subtitle-responsive" style={{ 
+            lineHeight: '1.8', 
+            letterSpacing: '-0.01em',
+            fontSize: 'clamp(1rem, 2vw, 1.25rem)' 
+          }}>
             We bridge the gap between static charts and strategic foresight. Join our elite corporate bootcamp and turn raw numbers into competitive advantages.
           </p>
           

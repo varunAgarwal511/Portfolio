@@ -1,4 +1,5 @@
-import { Quote, Star } from 'lucide-react';
+import React, { useState, useRef, useEffect } from 'react';
+import { Quote, Star, ChevronLeft, ChevronRight } from 'lucide-react';
 
 const testimonials = [
   {
@@ -48,6 +49,49 @@ const StarRating = ({ rating = 5 }) => (
 );
 
 export default function Testimonials() {
+  const [activeIndex, setActiveIndex] = useState(0);
+  const scrollRef = useRef(null);
+
+  const handleScroll = () => {
+    if (scrollRef.current) {
+      const container = scrollRef.current;
+      const scrollPosition = container.scrollLeft;
+      const itemWidth = container.offsetWidth * 0.88; // matches the width in CSS
+      const newIndex = Math.round(scrollPosition / itemWidth);
+      if (newIndex !== activeIndex && newIndex < testimonials.length) {
+        setActiveIndex(newIndex);
+      }
+    }
+  };
+
+  const scrollTo = (index) => {
+    if (scrollRef.current) {
+      const container = scrollRef.current;
+      const itemWidth = container.offsetWidth * 0.88;
+      container.scrollTo({
+        left: index * itemWidth,
+        behavior: 'smooth'
+      });
+      setActiveIndex(index);
+    }
+  };
+
+  const nextSlide = () => {
+    if (activeIndex < testimonials.length - 1) {
+      scrollTo(activeIndex + 1);
+    } else {
+      scrollTo(0);
+    }
+  };
+
+  const prevSlide = () => {
+    if (activeIndex > 0) {
+      scrollTo(activeIndex - 1);
+    } else {
+      scrollTo(testimonials.length - 1);
+    }
+  };
+
   return (
     <section style={{ overflow: 'hidden', position: 'relative' }}>
       {/* Decorative Background Blobs */}
@@ -105,115 +149,144 @@ export default function Testimonials() {
           </p>
         </div>
 
-        <div className="mobile-slider-container" style={{
-          position: 'relative',
-          zIndex: 1
-        }}>
-          {testimonials.map((t, index) => (
-            <div key={index} className="mobile-slider-item full-width-slide" style={{
-              backgroundColor: 'rgba(255, 255, 255, 0.7)',
-              backdropFilter: 'blur(12px)',
-              WebkitBackdropFilter: 'blur(12px)',
-              padding: 'clamp(1.5rem, 5vw, 3.5rem) clamp(1.5rem, 5vw, 3rem) clamp(1.5rem, 5vw, 3rem)',
-              borderRadius: 'var(--radius-xl)',
-              border: '1px solid rgba(255, 255, 255, 0.8)',
+        <div style={{ position: 'relative', padding: '0 10px' }}>
+          {/* Navigation Arrows (Desktop) */}
+          <button className="slider-nav-btn prev" onClick={prevSlide} aria-label="Previous testimonial">
+            <ChevronLeft size={24} />
+          </button>
+          <button className="slider-nav-btn next" onClick={nextSlide} aria-label="Next testimonial">
+            <ChevronRight size={24} />
+          </button>
+
+          <div 
+            ref={scrollRef} 
+            onScroll={handleScroll}
+            className="mobile-slider-container" 
+            style={{
               position: 'relative',
-              transition: 'all 0.5s cubic-bezier(0.23, 1, 0.32, 1)',
-              cursor: 'default',
-              display: 'flex',
-              flexDirection: 'column',
-              boxShadow: '0 10px 30px -10px rgba(0,0,0,0.05)',
-              overflow: 'hidden'
+              zIndex: 1
             }}
-              onMouseOver={(e) => {
-                e.currentTarget.style.transform = 'translateY(-12px) scale(1.01)';
-                e.currentTarget.style.boxShadow = '0 30px 60px -15px rgba(0,0,0,0.12)';
-                e.currentTarget.style.borderColor = 'rgba(79, 70, 229, 0.3)';
-                const quote = e.currentTarget.querySelector('.quote-icon');
-                if (quote) quote.style.opacity = '0.3';
-              }}
-              onMouseOut={(e) => {
-                e.currentTarget.style.transform = 'translateY(0) scale(1)';
-                e.currentTarget.style.boxShadow = '0 10px 30px -10px rgba(0,0,0,0.05)';
-                e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.8)';
-                const quote = e.currentTarget.querySelector('.quote-icon');
-                if (quote) quote.style.opacity = '0.1';
-              }}>
-              {/* Decorative Quote Icon */}
-              <Quote
-                className="quote-icon"
-                size={80}
-                color="var(--accent-primary)"
+          >
+            {testimonials.map((t, index) => (
+              <div key={index} 
+                className={`mobile-slider-item full-width-slide slider-card ${activeIndex === index ? 'active' : ''}`}
                 style={{
-                  position: 'absolute',
-                  top: '-10px',
-                  right: '-10px',
-                  opacity: 0.1,
-                  transition: 'all 0.5s ease',
-                  transform: 'rotate(10deg)'
-                }}
-              />
-
-              <StarRating />
-
-              <p style={{
-                fontSize: 'clamp(0.95rem, 4vw, 1.15rem)',
-                color: 'var(--text-primary)',
-                lineHeight: '1.8',
-                marginBottom: 'clamp(1.5rem, 4vw, 2.5rem)',
-                flexGrow: 1,
-                fontWeight: '500',
+                backgroundColor: 'rgba(255, 255, 255, 0.7)',
+                backdropFilter: 'blur(12px)',
+                WebkitBackdropFilter: 'blur(12px)',
+                padding: 'clamp(1.5rem, 5vw, 3.5rem) clamp(1.5rem, 5vw, 3rem) clamp(1.5rem, 5vw, 3rem)',
+                borderRadius: 'var(--radius-xl)',
+                border: '1px solid rgba(255, 255, 255, 0.8)',
                 position: 'relative',
-                zIndex: 1
-              }}>
-                "{t.text}"
-              </p>
-
-              <div style={{
+                transition: 'all 0.5s cubic-bezier(0.23, 1, 0.32, 1)',
+                cursor: 'default',
                 display: 'flex',
-                alignItems: 'center',
-                gap: '1.25rem',
-                marginTop: 'auto',
-                paddingTop: '2rem',
-                borderTop: '1px solid rgba(0,0,0,0.05)'
-              }}>
-                <div style={{ position: 'relative' }}>
-                  <img
-                    src={t.image}
-                    alt={t.name}
-                    style={{
-                      width: '60px',
-                      height: '60px',
-                      borderRadius: '18px',
-                      objectFit: 'cover',
-                      border: '3px solid white',
-                      boxShadow: 'var(--shadow-md)'
-                    }}
-                  />
-                  <div style={{
+                flexDirection: 'column',
+                boxShadow: '0 10px 30px -10px rgba(0,0,0,0.05)',
+                overflow: 'hidden',
+              }}
+                onMouseOver={(e) => {
+                  e.currentTarget.style.transform = 'translateY(-12px) scale(1.01)';
+                  e.currentTarget.style.boxShadow = '0 30px 60px -15px rgba(0,0,0,0.12)';
+                  e.currentTarget.style.borderColor = 'rgba(79, 70, 229, 0.3)';
+                  const quote = e.currentTarget.querySelector('.quote-icon');
+                  if (quote) quote.style.opacity = '0.3';
+                }}
+                onMouseOut={(e) => {
+                  e.currentTarget.style.transform = '';
+                  e.currentTarget.style.boxShadow = '0 10px 30px -10px rgba(0,0,0,0.05)';
+                  e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.8)';
+                  const quote = e.currentTarget.querySelector('.quote-icon');
+                  if (quote) quote.style.opacity = '0.1';
+                }}>
+                {/* Decorative Quote Icon */}
+                <Quote
+                  className="quote-icon"
+                  size={80}
+                  color="var(--accent-primary)"
+                  style={{
                     position: 'absolute',
-                    bottom: '-4px',
-                    right: '-4px',
-                    width: '20px',
-                    height: '20px',
-                    backgroundColor: '#10b981',
-                    borderRadius: '50%',
-                    border: '3px solid white'
-                  }} title="Verified Professional" />
-                </div>
-                <div>
-                  <h4 style={{ fontSize: '1.15rem', marginBottom: '0.2rem', color: 'var(--text-primary)', fontWeight: '800' }}>{t.name}</h4>
-                  <span style={{
-                    color: 'var(--accent-primary)',
-                    fontSize: '0.85rem',
-                    fontWeight: '700',
-                    textTransform: 'uppercase',
-                    letterSpacing: '0.05em'
-                  }}>{t.role}</span>
+                    top: '-10px',
+                    right: '-10px',
+                    opacity: 0.1,
+                    transition: 'all 0.5s ease',
+                    transform: 'rotate(10deg)'
+                  }}
+                />
+
+                <StarRating />
+
+                <p style={{
+                  fontSize: 'clamp(0.95rem, 4vw, 1.15rem)',
+                  color: 'var(--text-primary)',
+                  lineHeight: '1.8',
+                  marginBottom: 'clamp(1.5rem, 4vw, 2.5rem)',
+                  flexGrow: 1,
+                  fontWeight: '500',
+                  position: 'relative',
+                  zIndex: 1
+                }}>
+                  "{t.text}"
+                </p>
+
+                <div style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '1.25rem',
+                  marginTop: 'auto',
+                  paddingTop: '2rem',
+                  borderTop: '1px solid rgba(0,0,0,0.05)'
+                }}>
+                  <div style={{ position: 'relative' }}>
+                    <img
+                      src={t.image}
+                      alt={t.name}
+                      style={{
+                        width: '60px',
+                        height: '60px',
+                        borderRadius: '18px',
+                        objectFit: 'cover',
+                        border: '3px solid white',
+                        boxShadow: 'var(--shadow-md)'
+                      }}
+                    />
+                    <div style={{
+                      position: 'absolute',
+                      bottom: '-4px',
+                      right: '-4px',
+                      width: '20px',
+                      height: '20px',
+                      backgroundColor: '#10b981',
+                      borderRadius: '50%',
+                      border: '3px solid white'
+                    }} title="Verified Professional" />
+                  </div>
+                  <div>
+                    <h4 style={{ fontSize: '1.15rem', marginBottom: '0.2rem', color: 'var(--text-primary)', fontWeight: '800' }}>{t.name}</h4>
+                    <span style={{
+                      color: 'var(--accent-primary)',
+                      fontSize: '0.85rem',
+                      fontWeight: '700',
+                      textTransform: 'uppercase',
+                      letterSpacing: '0.05em'
+                    }}>{t.role}</span>
+                  </div>
                 </div>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
+
+          {/* Pagination Dots */}
+          <div className="slider-dots">
+            {testimonials.map((_, i) => (
+              <button
+                key={i}
+                className={`dot ${activeIndex === i ? 'active' : ''}`}
+                onClick={() => scrollTo(i)}
+                aria-label={`Go to testimonial ${i + 1}`}
+              />
+            ))}
+          </div>
         </div>
       </div>
     </section>
