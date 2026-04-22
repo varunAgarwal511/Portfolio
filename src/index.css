@@ -23,6 +23,7 @@
   --radius-md: 14px;
   --radius-lg: 20px;
   --radius-xl: 32px;
+  --border-color: rgba(0, 0, 0, 0.08);
 }
 
 * {
@@ -37,7 +38,7 @@ html {
 }
 
 body {
-  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
   color: var(--text-primary);
   background-color: var(--bg-primary);
   line-height: 1.6;
@@ -52,7 +53,7 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: 'Outfit', sans-serif;
+  font-family: 'Plus Jakarta Sans', sans-serif;
   font-weight: 800;
   line-height: 1.1;
   color: var(--text-primary);
@@ -480,5 +481,74 @@ section {
       justify-content: space-between;
       text-align: left;
     }
+  }
+}
+
+/* --- BENEFITS SECTION RESPONSIVE --- */
+.benefits-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 3rem;
+  align-items: center;
+}
+
+.benefits-visual-wrapper {
+  position: relative;
+  margin-top: 0.5rem; /* Reduced to move photo up on mobile */
+}
+
+@media (min-width: 1024px) {
+  .benefits-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+  }
+  
+  .benefits-visual-wrapper {
+    margin-top: 0;
+  }
+}
+
+.benefits-list {
+  list-style: none;
+  padding: 0;
+  margin: 2rem 0;
+}
+
+.benefit-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 1.25rem;
+  margin-bottom: 1.25rem;
+  font-size: clamp(1rem, 1.5vw, 1.1rem);
+  color: var(--text-primary);
+  font-weight: 500;
+}
+
+.mentorship-card {
+  display: none; /* Hidden on mobile to avoid cluttering the photo */
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  right: 20px;
+  background: white;
+  padding: 1.25rem;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border-color);
+  z-index: 3;
+  box-shadow: var(--shadow-xl);
+  align-items: center;
+  gap: 1rem;
+}
+
+@media (min-width: 768px) {
+  .mentorship-card {
+    display: flex; /* Visible on tablet and desktop */
+    position: absolute;
+    bottom: 40px;
+    left: -20px;
+    right: auto;
+    width: max-content;
+    padding: 1.5rem 2rem;
+    gap: 1.25rem;
   }
 }
