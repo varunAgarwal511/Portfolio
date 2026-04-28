@@ -327,7 +327,7 @@ export default function Domains() {
                       if (arrow) arrow.style.transform = 'translateX(0)';
                     }}>
 
-                    <div style={{ height: '260px', overflow: 'hidden', position: 'relative' }}>
+                    <div className="card-image-wrapper" style={{ height: '260px', overflow: 'hidden', position: 'relative' }}>
                       <img
                         src={domain.image}
                         alt={domain.title}
@@ -341,8 +341,8 @@ export default function Domains() {
                       />
                     </div>
 
-                    <div style={{ padding: '3rem 2.5rem 2.5rem', display: 'flex', flexDirection: 'column', flexGrow: 1, position: 'relative' }}>
-                      <div style={{
+                    <div className="card-content" style={{ padding: '3rem 2.5rem 2.5rem', display: 'flex', flexDirection: 'column', flexGrow: 1, position: 'relative' }}>
+                      <div className="card-icon-badge" style={{
                         position: 'absolute',
                         top: '-35px',
                         left: '2.5rem',

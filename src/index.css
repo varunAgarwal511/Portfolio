@@ -229,7 +229,9 @@ section {
 
 @media (max-width: 768px) {
   .hero-section {
-    padding: 3rem 0 2rem;
+    padding: 1.5rem 0 3rem;
+    min-height: 85vh;
+    align-items: center;
     background-image:
       linear-gradient(180deg, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0.6) 70%, rgba(255, 255, 255, 0.9) 100%),
       url('https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=2070&auto=format&fit=crop');
@@ -440,6 +442,45 @@ section {
   .slider-card.active {
     opacity: 1;
     transform: scale(1);
+  }
+
+  .slider-card .card-image-wrapper {
+    height: 140px !important;
+  }
+
+  .slider-card .card-content {
+    padding: 1.5rem 1.25rem 1.25rem !important;
+  }
+
+  .slider-card .card-icon-badge {
+    top: -20px !important;
+    left: 1.25rem !important;
+    padding: 0.6rem !important;
+  }
+
+  .slider-card h3 {
+    font-size: 1.35rem !important;
+    margin-bottom: 0.5rem !important;
+  }
+
+  .slider-card p {
+    font-size: 0.95rem !important;
+    line-height: 1.5 !important;
+    margin-bottom: 1.5rem !important;
+  }
+
+  .project-card {
+    padding: 1.25rem !important;
+  }
+
+  .project-card h3 {
+    font-size: 1.25rem !important;
+    margin-bottom: 0.75rem !important;
+  }
+
+  .project-card p {
+    font-size: 0.9rem !important;
+    margin-bottom: 1.5rem !important;
   }
 
   section {

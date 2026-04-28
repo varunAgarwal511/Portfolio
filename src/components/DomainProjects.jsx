@@ -17,7 +17,7 @@ export default function DomainProjects({ domain, onBack }) {
   if (selectedProject) {
     return (
       <div className="animate-fade-in" style={{ paddingBottom: '4rem' }}>
-        <button 
+        <button
           onClick={() => setSelectedProject(null)}
           style={{
             display: 'flex',
@@ -58,8 +58,8 @@ export default function DomainProjects({ domain, onBack }) {
           marginBottom: '4rem',
           boxShadow: 'var(--shadow-xl)'
         }}>
-          <img 
-            src={selectedProject.fullImage} 
+          <img
+            src={selectedProject.fullImage}
             alt={selectedProject.title}
             style={{
               width: '100%',
@@ -90,10 +90,10 @@ export default function DomainProjects({ domain, onBack }) {
               }}>
                 Case Study
               </span>
-              <h2 style={{ 
-                fontSize: 'clamp(2.5rem, 5vw, 4rem)', 
-                color: 'white', 
-                fontWeight: '900', 
+              <h2 style={{
+                fontSize: 'clamp(2.5rem, 5vw, 4rem)',
+                color: 'white',
+                fontWeight: '900',
                 letterSpacing: '-0.03em',
                 lineHeight: '1.1'
               }}>
@@ -106,9 +106,8 @@ export default function DomainProjects({ domain, onBack }) {
         {/* Impact Metrics */}
         <div className="mobile-slider-container" style={{ marginBottom: '5rem' }}>
           {selectedProject.impact.map((metric, i) => (
-            <div key={i} className="mobile-slider-item full-width-slide" style={{
+            <div key={i} className="mobile-slider-item full-width-slide slider-card" style={{
               backgroundColor: 'var(--bg-secondary)',
-              padding: '2.5rem',
               borderRadius: 'var(--radius-lg)',
               border: '1px solid var(--border-color)',
               display: 'flex',
@@ -116,47 +115,49 @@ export default function DomainProjects({ domain, onBack }) {
               gap: '1rem',
               transition: 'transform 0.3s ease'
             }}
-            onMouseOver={(e) => e.currentTarget.style.transform = 'translateY(-5px)'}
-            onMouseOut={(e) => e.currentTarget.style.transform = 'translateY(0)'}
+              onMouseOver={(e) => e.currentTarget.style.transform = 'translateY(-5px)'}
+              onMouseOut={(e) => e.currentTarget.style.transform = 'translateY(0)'}
             >
-              <div style={{
-                width: '48px',
-                height: '48px',
-                backgroundColor: 'var(--accent-light)',
-                borderRadius: '12px',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                color: 'var(--accent-primary)',
-                marginBottom: '0.5rem'
-              }}>
-                {i === 0 ? <TrendingUp size={24} /> : i === 1 ? <Target size={24} /> : <Zap size={24} />}
-              </div>
-              <div style={{ fontSize: '2.5rem', fontWeight: '900', color: 'var(--text-primary)', letterSpacing: '-0.02em' }}>
-                {metric.value}
-              </div>
-              <div>
-                <div style={{ fontWeight: '700', color: 'var(--text-primary)', fontSize: '1.1rem', marginBottom: '0.25rem' }}>{metric.label}</div>
-                <div style={{ color: 'var(--text-secondary)', fontSize: '0.95rem' }}>{metric.detail}</div>
+              <div className="card-content" style={{ padding: '2.5rem', display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+                <div style={{
+                  width: '48px',
+                  height: '48px',
+                  backgroundColor: 'var(--accent-light)',
+                  borderRadius: '12px',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  color: 'var(--accent-primary)',
+                  marginBottom: '0.5rem'
+                }}>
+                  {i === 0 ? <TrendingUp size={24} /> : i === 1 ? <Target size={24} /> : <Zap size={24} />}
+                </div>
+                <div style={{ fontSize: '2.5rem', fontWeight: '900', color: 'var(--text-primary)', letterSpacing: '-0.02em' }}>
+                  {metric.value}
+                </div>
+                <div>
+                  <div style={{ fontWeight: '700', color: 'var(--text-primary)', fontSize: '1.1rem', marginBottom: '0.25rem' }}>{metric.label}</div>
+                  <div style={{ color: 'var(--text-secondary)', fontSize: '0.95rem' }}>{metric.detail}</div>
+                </div>
               </div>
             </div>
           ))}
         </div>
 
         {/* Content Section */}
-        <div style={{ 
-          display: 'grid', 
-          gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', 
-          gap: '3rem' 
+        <div style={{
+          display: 'grid',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
+          gap: '3rem'
         }}>
           <div>
             <h3 style={{ fontSize: '2rem', marginBottom: '2rem', display: 'flex', alignItems: 'center', gap: '1rem' }}>
               <div style={{ width: '8px', height: '32px', backgroundColor: 'var(--accent-primary)', borderRadius: '4px' }}></div>
               Project Background
             </h3>
-            <p style={{ 
-              fontSize: '1.2rem', 
-              lineHeight: '1.8', 
+            <p style={{
+              fontSize: '1.2rem',
+              lineHeight: '1.8',
               color: 'var(--text-secondary)',
               marginBottom: '2rem'
             }}>
@@ -181,9 +182,9 @@ export default function DomainProjects({ domain, onBack }) {
             </h3>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
               {selectedProject.keyFeatures.map((feature, i) => (
-                <div key={i} style={{ 
-                  display: 'flex', 
-                  gap: '1.25rem', 
+                <div key={i} style={{
+                  display: 'flex',
+                  gap: '1.25rem',
                   alignItems: 'flex-start',
                   padding: '1.25rem',
                   backgroundColor: 'var(--bg-primary)',
@@ -206,7 +207,7 @@ export default function DomainProjects({ domain, onBack }) {
 
   return (
     <div className="animate-fade-in">
-      <button 
+      <button
         onClick={onBack}
         style={{
           display: 'flex',
@@ -235,15 +236,15 @@ export default function DomainProjects({ domain, onBack }) {
       >
         <ArrowLeft size={18} /> Back to Industry Solutions
       </button>
-      
+
       <div style={{ marginBottom: '4rem', display: 'flex', alignItems: 'center', gap: '2rem', flexWrap: 'wrap' }}>
         <div style={{
-            backgroundColor: 'var(--bg-primary)',
-            padding: '1.5rem',
-            borderRadius: 'var(--radius-lg)',
-            border: '1px solid var(--border-color)',
-            display: 'flex',
-            boxShadow: 'var(--shadow-md)'
+          backgroundColor: 'var(--bg-primary)',
+          padding: '1.5rem',
+          borderRadius: 'var(--radius-lg)',
+          border: '1px solid var(--border-color)',
+          display: 'flex',
+          boxShadow: 'var(--shadow-md)'
         }}>
           {domain.icon}
         </div>
@@ -262,7 +263,6 @@ export default function DomainProjects({ domain, onBack }) {
           <div key={project.id} className="project-card mobile-slider-item full-width-slide" style={{
             backgroundColor: 'var(--bg-primary)',
             borderRadius: 'var(--radius-xl)',
-            padding: '2.5rem',
             border: '1px solid var(--border-color)',
             boxShadow: 'var(--shadow-sm)',
             transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
@@ -311,8 +311,8 @@ export default function DomainProjects({ domain, onBack }) {
             <p style={{ color: 'var(--text-secondary)', lineHeight: '1.7', fontSize: '1.05rem', flexGrow: 1, marginBottom: '2.5rem' }}>
               {project.description}
             </p>
-            
-            <div 
+
+            <div
               onClick={() => setSelectedProject(project)}
               style={{
                 display: 'flex',
